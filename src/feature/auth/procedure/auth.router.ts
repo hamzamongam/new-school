@@ -8,7 +8,7 @@ const authRepo = new AuthRepository();
 const authService = new AuthService(authRepo);
 const os = implement(authContract).$context<Context>();
 
-export const authProcedure = os.router({
+export const authRouter = os.router({
 	login: os.login.handler(({ input }) => {
 		return authService.login(input);
 	}),

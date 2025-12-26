@@ -4,6 +4,4 @@ import { requiredAuthMiddleware } from "./middleware";
 
 export const publicProcedure = os.$context<Context>();
 
-export const authedProcedure = os
-	.$context<Context>()
-	.use(requiredAuthMiddleware);
+export const authedProcedure = publicProcedure.use(requiredAuthMiddleware);
