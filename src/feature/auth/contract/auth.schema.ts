@@ -6,14 +6,14 @@ export const loginSchema = z.object({
 })
 
 export const RegisterSchoolSchema = z.object({
-  // സ്കൂൾ വിവരങ്ങൾ
-  schoolName: z.string().min(3, "സ്കൂൾ പേര് നിർബന്ധമാണ്"),
-  slug: z.string().min(3).regex(/^[a-z0-9-]+$/, "Slug ലളിതമായിരിക്കണം (eg: oxford-int)"),
+  // School information
+  schoolName: z.string().min(3, "School name is required"),
+  slug: z.string().min(3).regex(/^[a-z0-9-]+$/, "Slug must be simple (e.g., oxford-int)"),
   
-  // അഡ്മിൻ വിവരങ്ങൾ
+  // Admin information
   adminName: z.string().min(2),
-  email: z.string().email("കൃത്യമായ ഇമെയിൽ നൽകുക"),
-  password: z.string().min(8, "പാസ്‌വേഡിന് കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ വേണം"),
+  email: z.string().email("Please provide a valid email"),
+  password: z.string().min(8, "Password must be at least 8 characters long"),
 });
 
 

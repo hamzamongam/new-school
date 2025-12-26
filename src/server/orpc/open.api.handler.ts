@@ -1,18 +1,17 @@
 import { OpenAPIHandler } from "@orpc/openapi/fetch"
 import { router } from "./router"
-import { onError } from "@orpc/server"
 import { SmartCoercionPlugin } from "@orpc/json-schema"
 import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4"
 import { OpenAPIReferencePlugin } from "@orpc/openapi/plugins"
+import { onGlobalError } from "./utils"
 
-
-
-
+/**
+ * Centralized OpenAPI handler for REST-like access to ORPC procedures.
+ * Includes global interceptors for error mapping and logging.
+ */
 export const openApiHandler = new OpenAPIHandler(router, {
   interceptors: [
-    onError((error) => {
-      console.error(error)
-    }),
+    onGlobalError, // Centralized domain error mapping
   ],
   plugins: [
     new SmartCoercionPlugin({
@@ -26,7 +25,6 @@ export const openApiHandler = new OpenAPIHandler(router, {
           version: '1.0.0',
         },
         commonSchemas: {
-        //   Todo: { schema: TodoSchema },
           UndefinedError: { error: 'UndefinedError' },
         },
         security: [{ bearerAuth: [] }],
